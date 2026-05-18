@@ -16,8 +16,8 @@ const RecentlyViewed = require('./RecentlyViewed')(sequelize, DataTypes);
 
 // ----- Associations -----
 //Role can have many user
-Role.hasMany(User, {foreginKey: 'RoleId'})
-User.belongsTo(Role, {foreginKey: RoleId})
+Role.hasMany(User, { foreignKey: 'RoleId' })
+User.belongsTo(Role, { foreignKey: 'RoleId' });
 
 // A Membership can have many users
 Membership.hasMany(User, { foreignKey: 'MembershipId' })
