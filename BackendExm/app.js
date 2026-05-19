@@ -12,14 +12,26 @@ const { sequelize } = require('./models')
 
 var app = express();
 
-// Allow cross-origin requests.
+// Allow cross-origin requests from middleware.
 app.use(cors())
 app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 
-// Swagger documentation available at /doc
+//Routes
+app.use('/init', require('./routes/init.routes'))
+app.use('/auth', require('./routes/auth.routes'))
+app.use('/products', require('./routes/product.routes'))
+app.use('/categories', require('./routes/category.routes'))
+app.use('/brands', require('./routes/brand.routes'))
+app.use('/cart', require('./routes/cart.routes'))
+app.use('/orders', require('./routes/order.routes'))
+app.use('/membership', require('./routes/membership.routes'))
+app.use('/search', require('./routes/search.routes'))
+app.use('/users', require('./routes/user.routes'))
+
+// Swagger documentation available at doc
 const swaggerUi = require('swagger-ui-express')
 const swaggerSpec = require('./swagger/swagger')
 app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
