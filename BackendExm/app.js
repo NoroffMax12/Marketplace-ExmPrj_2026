@@ -37,7 +37,7 @@ const swaggerSpec = require('./swagger/swagger')
 app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
 
 
-sequelize.sync({ alter: true })
+sequelize.sync({ alter: false }) ///Learned that sequilize.sync database - only creates tables if they don't exist
   .then(() => console.log('Database synced successfully'))
   .catch((err) => console.error('Database sync failed:', err))
 

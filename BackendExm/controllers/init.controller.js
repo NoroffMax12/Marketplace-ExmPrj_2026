@@ -22,7 +22,7 @@ exports.initDatabase = async (req, res) => {
         { id: 1, name: 'Bronze', minQuantity: 0, maxQuantity: 14, discount: 0 },
         { id: 2, name: 'Silver', minQuantity: 15, maxQuantity: 29, discount: 15 },
         { id: 3, name: 'Gold', minQuantity: 30, maxQuantity: null, discount: 30 },
-      ]);
+      ])
     }
 
     // --3. Seed Admin user--
