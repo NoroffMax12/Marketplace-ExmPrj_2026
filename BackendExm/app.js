@@ -30,6 +30,7 @@ app.use('/orders', require('./routes/order.routes'))
 app.use('/membership', require('./routes/membership.routes'))
 app.use('/search', require('./routes/search.routes'))
 app.use('/users', require('./routes/user.routes'))
+app.use('/recently-viewed', require('./routes/recentlyviewed.routes'))
 
 // Swagger documentation available at doc
 const swaggerUi = require('swagger-ui-express')

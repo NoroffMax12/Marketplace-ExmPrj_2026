@@ -1,7 +1,7 @@
-// Handles all CRUD operations for products.
-// Only admins can create, update or soft delete products.
+/*Handles all CRUD operations for products.Only admins can create, update or soft delete products.*/
+
 const { sequelize } = require('../models');
-const { Product, Brand, Category } = require('../models')
+const { Product, Brand, Category, RecentlyViewed } = require('../models')
 
 // --- GET all products ---
 // Admin sees all products including deleted ones. Regular users only see non-deleted products.
@@ -58,6 +58,15 @@ exports.getOne = async (req, res) => {
         status: 'error',
         statuscode: 404,
         data: { result: 'Product not found', products: [] },
+      })
+    }
+    
+    //Product view for recently viewed feature (only for authenticated users)
+    if (req.user) {
+      await RecentlyViewed.upsert({ //NTS: Upsert is a combination of "update" and "insert". If a row with same UserId & ProductId  exists, then update viewedAt to  current timestamp, if the row don't exist -> create a new row
+        UserId: req.user.id,
+        ProductId: id,
+        viewedAt: new Date(),
       })
     }
 
