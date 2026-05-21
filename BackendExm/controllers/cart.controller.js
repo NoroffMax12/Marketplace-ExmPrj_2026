@@ -159,6 +159,7 @@ exports.removeItem = async (req, res) => {
 //--POST checkout cart--
 exports.checkout = async (req, res) => {
   try { 
+    console.log('Checkout hit user:', req.user); //Husk å slette
     const cart = await Cart.findOne({ // Gets user's active cart with items & product details
       where: {UserId: req.user.id, isCheckedOut: false },
       include: [{
@@ -200,10 +201,17 @@ exports.checkout = async (req, res) => {
 
     const totalPrice = subtotal * (1 - discount / 100)
 
-    //Generate unique 8-character order number
+    /*Math.random() generates a random decimal number like 0.7394821
+    - .toString(36) converts it to base-36 (0-9 + a-z) f,eks "0.p3k9x2m"
+    - .substr(2, 8) cuts away "0." and takes the first 8 characters, f,eks "p3k9x2m"
+    - .toUpperCase() converts it to uppercase letters, f,eks "P3K9X2M" */
     const orderNumber = Math.random().toString(36).substr(2, 8).toUpperCase()
 
-    //Create the order with membership snapshot at checkout time
+    /* Create the order with membership snapshot at checkout time
+    - .toFixed(2) rounds to 2 decimal places and returns a STRING f,eks "551.65"
+    - parseFloat() converts the string back to a number
+    - the result is a clean number with a max of 2 decimal places which is important for price calculation.
+    */
     const order = await Order.create({
       orderNumber,
       status: 'In Progress',
@@ -228,13 +236,20 @@ exports.checkout = async (req, res) => {
       //Mark cart as checked out
     await cart.update({ isCheckedOut: true })
 
-    //Calculate total items purchased ever to update membership
-    const totalPurchased = await OrderItem.sum('quantity', {
+    /*Calculate total items purchased ever to update membership. But hit an issue that; When you run a standard SUM() in Sequelize with an include, it generates an SQL query in the background. Since there is no GROUP BY clause in this generated query, MySQL doesn't know which specific orders.id or orders.orderNumber to return alongside the single, aggregated sum. With ONLY_FULL_GROUP_BY enabled, the database throws an ERROR 1055:
+    - const totalPurchased = await OrderItem.sum('quantity', {
       include: [{
         model: Order,
-        where:  {UserId: req.user.id },
-      }],
-    })
+        where:  {UserId: req.user.id } */
+
+      /*By switching to Raw SQL, you take full control of the SELECT list and fetch only the sum, allowing MySQL to avoid guessing undefined row values.*/
+    const [[{ totalPurchased }]] = await sequelize.query(`
+    SELECT COALESCE(SUM(oi.quantity), 0) AS totalPurchased
+    FROM OrderItems oi
+    JOIN Orders o ON oi.OrderId = o.id
+    WHERE o.UserId = ${req.user.id}
+    `, { replacements: { userId: req.user.id } }) //Using replacements to prevent SQL injection
+
 
     //Finds correct membership-tier based on total items purchased
     const newMembership = await Membership.findOne({

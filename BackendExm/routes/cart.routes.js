@@ -4,6 +4,24 @@ const router = express.Router()
 const cartController = require('../controllers/cart.controller')
 const authenticate = require('../middleware/auth.middleware')
 
+// Endpoint was not working proparly; had the wrong order for post & delete for checkout:
+
+/**
+ * @swagger
+ * /cart/checkout/now:
+ *   post:
+ *     summary: Checkout the cart and create an order
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       201:
+ *         description: Order created successfully
+ *       400:
+ *         description: No active cart or cart is empty
+ */
+router.post('/checkout/now', authenticate, cartController.checkout)
+
+
 /**
  * @swagger
  * /cart:
@@ -49,17 +67,5 @@ router.post('/', authenticate, cartController.addItem);
  */
 router.delete('/:itemId', authenticate, cartController.removeItem)
 
-/**
- * @swagger
- * /cart/checkout/now:
- *   post:
- *     summary: Checkout the cart and create an order
- *     security:
- *       - bearerAuth: []
- *     responses:
- *       201:
- *         description: Order created
- */
-router.post('/checkout/now', authenticate, cartController.checkout)
 
 module.exports = router;
