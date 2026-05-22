@@ -34,13 +34,13 @@ app.use('/recently-viewed', require('./routes/recentlyviewed.routes'))
 
 // Swagger documentation available at doc
 const swaggerUi = require('swagger-ui-express')
+
 const swaggerSpec = require('./swagger/swagger')
 app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
 
-
-sequelize.sync({ alter: false }) ///Learned that sequilize.sync database - only creates tables if they don't exist
+/*sequelize.sync({ alter: false }) ///Learned that sequilize.sync database - only creates tables if they don't exist
   .then(() => console.log('Database synced successfully'))
-  .catch((err) => console.error('Database sync failed:', err))
+  .catch((err) => console.error('Database sync failed:', err))*/
 
 app.use(function(req, res, next) {
   next(createError(404));
