@@ -10,5 +10,4 @@ module.exports = (sequelize, DataTypes) => {
   return Role
 };
 
-//had to change file name in order to deploy...ffs..
-//try again..
+//had to change file name in order to deploy...ffs...
