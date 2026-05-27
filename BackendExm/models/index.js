@@ -2,7 +2,7 @@ const sequelize = require('../config/database');
 const { DataTypes } = require('sequelize');
 
 // Import all model factory functions and pass in sequelize + DataTypes
-const Role = require('./Role')(sequelize, DataTypes);
+const Role = require('./role')(sequelize, DataTypes);
 const Membership = require('./Membership')(sequelize, DataTypes);
 const User = require('./User')(sequelize, DataTypes);
 const Category = require('./Category')(sequelize, DataTypes);
