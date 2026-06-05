@@ -51,7 +51,7 @@ export default function Dashboard() {// Initializes the Dashboard component and 
         categories: categories.length,
       })
 
-      setBrands(brands)
+      setBrands(brands)  
       setMemberships(memberships)
 
       // Build category chart data from products
