@@ -11,14 +11,21 @@ require('dotenv').config()
 const { sequelize } = require('./models')
 
 var app = express();
+
 // Allow requests from local dev and Vercel production
 app.use(cors({
   origin: [
     'http://localhost:5173',
-    'http://localhost:3002',
+    'http://localhost:3001',
     'https://marketplace-exm-26.vercel.app'
   ]
 }))
+
+//Didnt notice I accedently deleted the json-parsing
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser())
+
 //Routes.
 app.use('/init', require('./routes/init.routes'))
 app.use('/auth', require('./routes/auth.routes'))
