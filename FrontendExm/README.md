@@ -149,4 +149,4 @@ Password: P@ssword2023
 ## Arcitecture
 
 ##
-![Flowchart Frontend](./IMGs/FlowChart_FE.png)
+![Flowchart Frontend](./REFS/FlowChart_FE.png)

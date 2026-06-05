@@ -258,5 +258,9 @@ Deployed on Render.com with the MySQL database hosted on Railway. CORS is config
 ---
  
 ## AI Assistance
-**Claude AI (Anthropic)** — used as a development assistant for code guidance, debugging, and explanations throughout parts of this project.
+**Claude AI (Anthropic)** — used as a development assistant for code guidance, debugging, and explanations throughout parts of the project.
 ---
+
+## Reflection repport nested in /REFS folder
+
+![Reflection Repport](/REFS/Reflections_Repport_MG.pdf)
