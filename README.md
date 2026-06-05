@@ -264,3 +264,4 @@ Deployed on Render.com with the MySQL database hosted on Railway. CORS is config
 ## Reflection repport nested in /REFS folder
 
 ![Reflection Repport](/REFS/Reflections_Repport_MG.pdf)
+Reflections: https://github.com/NoroffMax12/Marketplace-ExmPrj_2026/blob/main/FrontendExm/REFS/Reflections_Repport_MG.pdf
