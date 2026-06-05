@@ -192,4 +192,7 @@ Swagger UI is available at:
 ## Database tables & associations
 
 ##
-![EER Diagram](./BackendExm/references/EER_Diagram-exmPRJ.png)
+![EER Diagram](./references/EER_Diagram-exmPRJ.png)
+
+##
+![Flowchart Backend](./references/FlowChart_BE.png)

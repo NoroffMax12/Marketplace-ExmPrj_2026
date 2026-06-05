@@ -11,14 +11,14 @@ require('dotenv').config()
 const { sequelize } = require('./models')
 
 var app = express();
-
-//Allow cross-origin requests from middleware.
-app.use(cors())
-app.use(logger('dev'))
-app.use(express.json())
-app.use(express.urlencoded({ extended: false }))
-app.use(cookieParser())
-
+// Allow requests from local dev and Vercel production
+app.use(cors({
+  origin: [
+    'http://localhost:5173',
+    'http://localhost:3002',
+    'https://marketplace-exm-26.vercel.app'
+  ]
+}))
 //Routes.
 app.use('/init', require('./routes/init.routes'))
 app.use('/auth', require('./routes/auth.routes'))
