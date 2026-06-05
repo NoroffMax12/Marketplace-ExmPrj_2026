@@ -1,6 +1,6 @@
-# Noroff EP Marketplace — Full-Stack Exam Project
+# Noroff EP Marketplace — Full-Stack Exam Project - Author: Max Gb
  
-A full-stack e-commerce marketplace built for the Noroff EP exam. It consists of a **REST API backend** (Node.js, Express, Sequelize, MySQL) and a **React admin panel frontend** (React, Vite). Both live in a single repository under `BackendExm/` and `FrontendExm/`.
+A full-stack e-commerce marketplace. Consisitng of a **REST API backend** (Node.js, Express, Sequelize, MySQL) and a **React admin panel frontend** (React, Vite). Both live in a single repository under `BackendExm/` and `FrontendExm/`.
  
 **Live frontend:** https://marketplace-exm-26.vercel.app
 **Backend API:** https://marketplace-exmprj-2026.onrender.com
